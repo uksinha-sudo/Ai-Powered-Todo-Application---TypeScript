@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
+import { userMiddleware } from "../middleware.js";
 const JWT_SECRET = process.env.JWT_SECRET;
 export const userRouter = Router();
 
@@ -82,7 +83,7 @@ userRouter.post("/signin", async(req, res) => {
         } 
         
         const token = jwt.sign({
-            id: existingUser._id
+            id: existingUser._id.toString()
         }, JWT_SECRET);
         
         res.send({
@@ -96,4 +97,18 @@ userRouter.post("/signin", async(req, res) => {
 
 });
 
+userRouter.get("/profile", userMiddleware, async(req, res) => {
+    const userId = req.userId;
+    try{
 
+        const user = await userModel.findOne({
+            _id: userId
+        });
+        
+        res.send({
+            user
+        });
+    } catch(error) {
+        return res.status(500).send({message: "Server error, Failed to get user profile"});
+    }
+})
