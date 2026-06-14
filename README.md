@@ -1,1 +1,1 @@
-An ai powered Full stack Todo Application
+An ai powered Full stack Todo Application ( Not vibe coded )

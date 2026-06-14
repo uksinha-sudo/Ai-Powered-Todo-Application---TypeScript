@@ -6,94 +6,78 @@ import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 const JWT_SECRET = process.env.JWT_SECRET;
 export const userRouter = Router();
-
-userRouter.post("/signup", async(req, res) => {
+userRouter.post("/signup", async (req, res) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    try{
-
+    try {
         const existingUser = await userModel.findOne({
             email
         });
-        
-        if(existingUser){
+        if (existingUser) {
             res.status(409).send({
                 message: "Email already in use"
-            })
+            });
             return;
         }
-
         const existingUsername = await userModel.findOne({
             username
         });
-
-        if(existingUsername){
+        if (existingUsername) {
             res.status(409).send({
                 message: "Username already exists, try another username"
-            })
+            });
             return;
-        };
-        
+        }
+        ;
         const hashedPassword = await bcrypt.hash(password, 10);
-        
         await userModel.create({
             username, email, password: hashedPassword
         });
-        
         res.send({
             message: "Account Created"
         });
-    } catch(error){
-        console.log(error);
-        res.status(500).send({message: "Internal server error, Failed to created account, please try again later"})
     }
-
+    catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Internal server error, Failed to created account, please try again later" });
+    }
 });
-
-userRouter.post("/signin", async(req, res) => {
+userRouter.post("/signin", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    try{
-
+    try {
         const existingUser = await userModel.findOne({
             email
         });
-        
-        if(!existingUser) {
+        if (!existingUser) {
             res.status(404).send({
                 message: "User not found"
-            })
+            });
             return;
         }
-        
         const checkPassword = await bcrypt.compare(password, existingUser.password);
-        
-        if(!checkPassword){
+        if (!checkPassword) {
             res.status(401).send({
                 message: "Incorrect Credentials"
             });
             return;
         }
-        
-        if(JWT_SECRET === undefined) {
-            console.log("jwt secret is null")
+        if (JWT_SECRET === undefined) {
+            console.log("jwt secret is null");
             return;
-        } 
-        
+        }
         const token = jwt.sign({
             id: existingUser._id
         }, JWT_SECRET);
-        
         res.send({
-            message:"User logged in",
+            message: "User logged in",
             token: token
         });
-    } catch(error) {
-        console.log(error);
-        res.status(500).send({message:"Internal server error, failed to sign up"})
     }
-
+    catch (error) {
+        console.log(error);
+        res.status(500).send({ message: "Internal server error, failed to sign up" });
+    }
 });
-
-
+//# sourceMappingURL=userRoute.js.map
