@@ -60,20 +60,20 @@ export declare const userModel: mongoose.Model<{
 }>;
 export declare const todoModel: mongoose.Model<{
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -82,18 +82,18 @@ export declare const todoModel: mongoose.Model<{
     id: string;
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 }, mongoose.Document<unknown, {}, {
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -102,16 +102,16 @@ export declare const todoModel: mongoose.Model<{
     id: string;
 }, unknown, {
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {
     __v: number;
 }>, {
     completion: boolean;
+    userId: mongoose.Types.ObjectId;
     task?: string | null;
-    userId?: mongoose.Types.ObjectId | null;
 } & {
     _id: mongoose.Types.ObjectId;
 } & {

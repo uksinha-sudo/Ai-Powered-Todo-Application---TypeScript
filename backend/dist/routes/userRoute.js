@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { userModel } from "../db.js";
+import { todoModel, userModel } from "../db.js";
 import dotenv from 'dotenv';
+import mongoose from "mongoose";
 dotenv.config();
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
@@ -93,6 +94,49 @@ userRouter.get("/profile", userMiddleware, async (req, res) => {
     }
     catch (error) {
         return res.status(500).send({ message: "Server error, Failed to get user profile" });
+    }
+});
+userRouter.put("/update", userMiddleware, async (req, res) => {
+    const username = req.body.username;
+    const email = req.body.emai;
+    const password = req.body.password;
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const updatedUser = await userModel.findOneAndUpdate({ _id: req.userId }, { username, email, password: hashedPassword }, { returnDocument: 'after' });
+        if (!updatedUser) {
+            return res.json({
+                message: "Failed to find user"
+            });
+        }
+        else {
+            res.send({
+                message: "updated info",
+                updatedUser
+            });
+        }
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).send({ message: "Server error, failed to update user's information" });
+    }
+});
+userRouter.delete("/delete", userMiddleware, async (req, res) => {
+    try {
+        const deleteUser = await userModel.findOneAndDelete({
+            _id: req.userId
+        });
+        const deleteTasks = await todoModel.deleteMany({
+            userId: new mongoose.Types.ObjectId(req.userId)
+        });
+        res.send({
+            message: "User Account deleted",
+            deleteUser,
+            deleteTasks
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).send({ message: "Server error, failed to delete user" });
     }
 });
 //# sourceMappingURL=userRoute.js.map

@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
 const todoSchema = new mongoose.Schema({
     task: { type: String },
     completion: { default: false, type: Boolean },
-    userId: { type: mongoose.Schema.ObjectId, ref: "User" }
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
 });
 export const userModel = mongoose.model("User", userSchema);
 export const todoModel = mongoose.model("Todo", todoSchema);

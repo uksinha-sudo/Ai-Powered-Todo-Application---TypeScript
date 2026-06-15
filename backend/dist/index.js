@@ -19,6 +19,7 @@ async function connectToDB() {
         }
         await mongoose.connect(Mongo_url);
         app.listen(PORT, () => {
+            console.log("SERVER STARTED AT", new Date().toISOString());
             console.log(`Connected to Database, Server is now listening`);
         });
     }
