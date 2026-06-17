@@ -1,7 +1,7 @@
 interface inputProps {
     type: string;
-    placeholder: string;
-    reference?: React.RefObject<HTMLInputElement>;
+    placeholder?: string;
+    reference?: React.RefObject<HTMLInputElement | null>;
     lable: string;
     style?: string;
 }

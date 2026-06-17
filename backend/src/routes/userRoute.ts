@@ -13,6 +13,7 @@ userRouter.post("/signup", async(req, res) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
+
     try{
 
         const existingUser = await userModel.findOne({
