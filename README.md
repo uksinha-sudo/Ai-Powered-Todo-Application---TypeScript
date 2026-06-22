@@ -6,3 +6,5 @@ An ai powered Full stack Todo Application ( Not vibe coded );
 -- initialized front-end in react, and created button and input components and a bit of a sign up.
 -- Completed the Sign Up Page frontend and connected it to backend
 -- Added Sign in page, dashboard (protected) and root page(also protected), added navbar component 
+
+-- added logout functionality in navbar
