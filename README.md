@@ -8,3 +8,5 @@ An ai powered Full stack Todo Application ( Not vibe coded );
 -- Added Sign in page, dashboard (protected) and root page(also protected), added navbar component 
 
 -- added logout functionality in navbar
+
+-- dashboard is now almost working, Showing all the tasks, and we can add task, according to which user is logged in...

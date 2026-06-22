@@ -73,11 +73,10 @@ todoRouter.get("/tasks", userMiddleware, async (req, res) => {
     }
 });
 todoRouter.put("/update/:todoId", userMiddleware, async (req, res) => {
-    const task = req.body.task;
     const completion = req.body.completion;
     const todoId = req.params.todoId;
     try {
-        const updatedTask = await todoModel.findOneAndUpdate({ _id: todoId }, { task, completion }, { returnDocument: 'after' });
+        const updatedTask = await todoModel.findByIdAndUpdate({ _id: todoId }, { completion }, { new: true });
         res.status(200).send({
             message: "Updated task",
             updatedTask
