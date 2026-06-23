@@ -4,6 +4,7 @@ import SignIn from './pages/SignIn';
 import Dashbaord from './pages/Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import HomeRoute from './HomeRoute';
+import Profile from './pages/Profile';
 
 function App() {
 
@@ -18,6 +19,11 @@ function App() {
           <Route path='/dashboard' element={
             <ProtectedRoute>
               <Dashbaord />
+            </ProtectedRoute>
+          } />
+          <Route path='/profile' element = {
+            <ProtectedRoute>
+              <Profile/>
             </ProtectedRoute>
           } />
         </Routes>
