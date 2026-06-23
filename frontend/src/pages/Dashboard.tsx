@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { BACKEND_URL_TASK } from "../config";
+import { toast } from 'react-toastify';
 
 interface Task {
     task: string;
@@ -46,14 +47,14 @@ const Dashbaord = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
-            alert(response.data.message);
+            toast.success(response.data.message);
             setText("");
             fetchTasks();
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log("Status:", error.response?.status);
                 console.log("Backend Error:", error.response?.data);
-                alert(error.response?.data.message);
+                toast.error(error.response?.data.message);
             } else {
                 console.log("Unexpected Error:", error);
             }
@@ -87,16 +88,12 @@ const Dashbaord = () => {
 
                         <Button lable="Add" styles="bg-green-300 hover:bg-green-500 px-5 mr-3 ml-2" onClick={addTask} />
 
-                        {/* <Button lable="Done" styles="bg-blue-300 hover:bg-blue-500 px-5 mr-3" onClick={checkCompletion} /> */}
-
-
-
                     </div>
 
                     {tasks.map((task) => (
                         <div
                             key={task._id}
-                            className="border-b h-10 flex items-center justify-between px-2"
+                            className="border-b h-15 flex items-center px-2 justify-between"
                         >
                             <p
                                 className={
@@ -108,9 +105,34 @@ const Dashbaord = () => {
                                 {task.task}
                             </p>
 
-                            <span>
-                                {task.completion ? "✅" : "⏳"}
-                            </span>
+                            <div className="flex gap-2">
+
+                                <Button lable="Delete" styles="bg-red-300 hover:bg-red-500" onClick={async () => {
+                                    const taskId = task._id;
+                                    const token = localStorage.getItem("token");
+                                    try {
+
+                                        const response = await axios.delete(`${BACKEND_URL_TASK}/delete/${taskId}`, {
+                                            headers: {
+                                                Authorization: `Bearer ${token}`
+                                            }
+                                        });
+                                        toast.info(response.data.message);
+                                        fetchTasks();
+                                    } catch (error) {
+                                        if (axios.isAxiosError(error)) {
+                                            console.log("Status:", error.response?.status);
+                                            console.log("Backend Error:", error.response?.data);
+                                            toast.error(error.response?.data.message);
+                                        } else {
+                                            console.log("Unexpected Error:", error);
+                                        }
+                                    }
+                                }} />
+                                <span>
+                                    {task.completion ? "✅" : "⏳"}
+                                </span>
+                            </div>
                         </div>
                     ))}
 

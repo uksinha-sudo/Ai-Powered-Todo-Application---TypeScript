@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
@@ -7,11 +8,14 @@ const Navbar = () => {
     function signOut(){
         try{
             localStorage.removeItem("token");
-            navigate("/signin")
+            navigate("/signin");
+            toast.info("Logged Out");
         }catch(error) {
             console.log(error);
         }
     }
+
+    /// NEXT TASK => Add user profile button here and make a user profile page
 
     return(
         <>

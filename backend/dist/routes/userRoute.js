@@ -13,6 +13,11 @@ userRouter.post("/signup", async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     try {
+        if (email === undefined) {
+            return res.status(404).send({
+                message: "Email can't be empty"
+            });
+        }
         const existingUser = await userModel.findOne({
             email
         });

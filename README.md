@@ -9,4 +9,6 @@ An ai powered Full stack Todo Application ( Not vibe coded );
 
 -- added logout functionality in navbar
 
--- dashboard is now almost working, Showing all the tasks, and we can add task, according to which user is logged in...
+-- dashboard is now almost working, Showing all the tasks, and we can add task, according to which user is logged in
+
+-- Completed Dashboard and Created Toasts, Added Task Delete functionality, and some UX improvements in All the pages

@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import axios from "axios";
 import { BACKEND_URL_USER } from "../config";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
     const usernameRef = useRef<HTMLInputElement>(null);
@@ -23,14 +24,14 @@ const SignUp = () => {
                 email,
                 password
             });
-            alert(response.data.message);
+            toast.success(response.data.message);
             navigate("/signin");
 
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log("Status:", error.response?.status);
                 console.log("Backend Error:", error.response?.data);
-                alert(error.response?.data.message);
+                toast.error(error.response?.data.message);
             } else {
                 console.log("Unexpected Error:", error);
             }
@@ -41,6 +42,7 @@ const SignUp = () => {
         <>
             <div className="w-full h-screen bg-black/80 flex items-center justify-center">
                 <div className="border border-blue-500 bg-black shadow-2xl rounded max-h-[60vh] w-[20vw] text-white flex flex-col gap-3 p-3">
+                <h2 className="m-auto font-bold text-2xl">Sign Up</h2>
                     <div className="flex flex-col gap-3">
                         <Input reference={usernameRef} type="text" placeholder="John Doe" lable="Username" />
                         <Input reference={emailRef} type="email" placeholder="john@example.com" lable="Email" />
@@ -48,6 +50,9 @@ const SignUp = () => {
                     </div>
                     <div className="flex mt-3 m-auto mb-4">
                         <Button lable="Submit" styles="hover:bg-blue-500 bg-blue-300 text-black px-4" onClick={onClickHandler} />
+                    </div>
+                    <div className="flex justify-center mb-2">
+                    <p>Already a user? <a href="/signin"><span className="text-blue-400 text-shadow-2xs">Sign In</span></a></p>
                     </div>
                 </div>
             </div>

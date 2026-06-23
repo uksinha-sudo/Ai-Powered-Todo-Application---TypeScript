@@ -48,7 +48,8 @@ todoRouter.delete("/delete/:taskId", userMiddleware, async (req, res) => {
         });
         res.status(200).send({
             success: true,
-            deletedTask
+            deletedTask,
+            message: "Task Deleted"
         });
     }
     catch (error) {
