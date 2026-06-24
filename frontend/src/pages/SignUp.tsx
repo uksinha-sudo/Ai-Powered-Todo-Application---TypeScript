@@ -51,8 +51,8 @@ const SignUp = () => {
                     <div className="flex mt-3 m-auto mb-4">
                         <Button lable="Submit" styles="hover:bg-blue-500 bg-blue-300 text-black px-4" onClick={onClickHandler} />
                     </div>
-                    <div className="flex justify-center mb-2">
-                    <p>Already a user? <a href="/signin"><span className="text-blue-400 text-shadow-2xs">Sign In</span></a></p>
+                    <div className="flex justify-center">
+                        <p>Already a user? <a href="/signin"><span className="text-blue-400 text-shadow-2xs">Sign In</span></a></p>
                     </div>
                 </div>
             </div>

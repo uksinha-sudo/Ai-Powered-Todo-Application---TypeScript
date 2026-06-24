@@ -14,7 +14,7 @@ interface Task {
 const Dashbaord = () => {
 
     const [text, setText] = useState('');
-    const [done, setDone] = useState(false);
+    // const [done, setDone] = useState(false);
     const [tasks, setTasks] = useState<Task[]>([]);
 
     const fetchTasks = async () => {

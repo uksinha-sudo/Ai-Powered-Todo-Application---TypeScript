@@ -1,25 +1,5 @@
-import { toast } from "react-toastify";
-import Button from "./Button";
-import { useNavigate } from "react-router-dom";
 import { ProfileIcon } from "../icons/ProfileIcon";
 const Navbar = () => {
-    const navigate = useNavigate();
-
-
-    // function signOut() {
-    //     try {
-    //         localStorage.removeItem("token");
-    //         navigate("/signin");
-    //         toast.info("Logged Out");
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    {/* <Button lable="Log out" styles="px-4 bg-blue-300 hover:bg-blue-500 text-white border border-black" onClick={signOut} /> */ }
-
-
-
     return (
         <>
             <div className="flex border-b-2 items-center justify-around h-20">

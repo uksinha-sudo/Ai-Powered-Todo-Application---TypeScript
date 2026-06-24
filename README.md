@@ -14,3 +14,5 @@ An ai powered Full stack Todo Application ( Not vibe coded );
 -- Completed Dashboard and Created Toasts, Added Task Delete functionality, and some UX improvements in All the pages
 
 -- Created full functional profile page
+
+-- Added back and logout buttons in Profile route

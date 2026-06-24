@@ -3,6 +3,9 @@ import { ProfileIcon } from "../icons/ProfileIcon";
 import axios from "axios";
 import { BACKEND_URL_USER } from "../config";
 import { toast } from "react-toastify";
+import { BackIcon } from "../icons/BackIcon";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 interface ProfileInfo {
     username: string;
@@ -15,6 +18,7 @@ interface ProfileInfo {
 const Profile = () => {
 
     const [info, setInfo] = useState<ProfileInfo | null>(null);
+    const navigate = useNavigate();
 
     const fetchUserInfo = async() => {
         const token = localStorage.getItem("token");
@@ -41,6 +45,17 @@ const Profile = () => {
         fetchUserInfo();
     },[]);
 
+    function signOut() {
+        try {
+            localStorage.removeItem("token");
+            navigate("/signin");
+            toast.info("Logged Out");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 return (
     <div className="h-screen w-full bg-slate/40">
         {info && (
@@ -55,16 +70,16 @@ return (
                     </p>
                 </div>
 
-                <div className="bg-amber-50 mt-10 flex w-150 m-auto">
+                <div className="bg-gray-300 mt-10 flex w-150 m-auto">
                     <div className="flex gap-5 flex-col p-3">
-                        <p>
+                        <p className="select-none">
                             Username:{" "}
                             <span className="text-blue-400 border border-black rounded font-bold p-2">
                                 {info.username}
                             </span>
                         </p>
 
-                        <p>
+                        <p className="select-none">
                             Email:{" "}
                             <span className="text-blue-400 border border-black rounded p-2">
                                 {info.email}
@@ -72,9 +87,10 @@ return (
                         </p>
                     </div>
                 </div>
-                <div className="bg-amber-200">
-                    {/* add back icon */}
-                    {/* add sign out button */}
+                <div className="mt-30 items-center justify-center flex flex-col">
+                    <a href="/dashboard"><BackIcon style="w-10 border rounded-4xl bg-gray-300 p-2 cursor-pointer" /></a>
+                    <p className="mt-1 font-semibold">Back</p>
+                    <Button lable="Log out" styles="mt-20 px-4 bg-blue-300 hover:bg-blue-500 text-white border border-black" onClick={signOut} />
                 </div>
             </div>
         )}
