@@ -16,7 +16,7 @@ app.use("/api/v1/todo", todoRouter);
 
 async function connectToDB(){
     const Mongo_url = process.env.MONGO_URL;
-    const PORT = process.env.PORT;
+    const PORT = process.env.PORT || 3000;
     try{
 
         if(!Mongo_url){
