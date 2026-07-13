@@ -1,8 +1,9 @@
 import { motion } from "motion/react";
 import { Link, useLocation } from "react-router-dom";
 import { GlassButton, GlassIconButton } from "./GlassButton";
-import { Menu, X, Sun, User, LogOut, LayoutDashboard, Settings } from "lucide-react";
+import { Menu, X, Sun, Moon, User, LogOut, LayoutDashboard, Settings } from "lucide-react";
 import { useNavbar, NavbarProvider } from "./NavbarContext";
+import { useTheme } from "../../context/ThemeContext";
 import { useState, useEffect, type ReactNode } from "react";
 
 interface GlassNavbarProps {
@@ -20,6 +21,7 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
   const location = useLocation();
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } = useNavbar();
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -119,9 +121,10 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
               variant="ghost"
               size="sm"
               aria-label="Toggle theme"
+              onClick={toggleTheme}
               className="hidden sm:flex"
             >
-              <Sun className="h-4 w-4 text-accent" />
+              {theme === "dark" ? <Sun className="h-4 w-4 text-accent" /> : <Moon className="h-4 w-4 text-accent" />}
             </GlassIconButton>
 
             {user ? (
@@ -202,6 +205,9 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
             })}
 
             <div className="flex flex-col gap-2 px-4 pt-4 border-t border-border/30">
+              <GlassButton variant="ghost" fullWidth leftIcon={theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />} onClick={toggleTheme}>
+                {theme === "dark" ? "Light Mode" : "Dark Mode"}
+              </GlassButton>
               {user ? (
                 <GlassButton variant="secondary" fullWidth leftIcon={<LogOut className="h-4 w-4" />} onClick={onSignOut}>
                   Sign Out

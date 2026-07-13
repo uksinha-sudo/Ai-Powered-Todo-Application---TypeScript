@@ -17,6 +17,40 @@
   --color-warning: #d4a843;
 }
 
+:root.light {
+  --color-bg: #fafafa;
+  --color-bg-elevated: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-border: #e5e5e5;
+  --color-border-hover: #d4d4d4;
+  --color-accent: #b8860b;
+  --color-accent-hover: #daa520;
+  --color-accent-muted: #b8860b/15;
+  --color-text: #0a0a0a;
+  --color-text-muted: #525252;
+  --color-text-subtle: #737373;
+  --color-success: #15803d;
+  --color-danger: #b91c1c;
+  --color-warning: #b8860b;
+}
+
+:root.dark {
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: #111111;
+  --color-bg-card: #141414;
+  --color-border: #262626;
+  --color-border-hover: #333333;
+  --color-accent: #d4a843;
+  --color-accent-hover: #e8c060;
+  --color-accent-muted: #d4a843/15;
+  --color-text: #fafafa;
+  --color-text-muted: #a3a3a3;
+  --color-text-subtle: #737373;
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --color-warning: #d4a843;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -191,18 +225,17 @@
 
 /* Toast customization */
 :root {
-  --toastify-color-light: rgba(20, 20, 20, 0.98);
-  --toastify-color-dark: rgba(20, 20, 20, 0.98);
-  --toastify-color-success: #16a34a;
-  --toastify-color-error: #dc2626;
-  --toastify-color-warning: #d4a843;
-  --toastify-color-info: #d4a843;
-  --toastify-text-color-light: #fafafa;
-  --toastify-text-color-dark: #fafafa;
+  --toastify-color-light: var(--color-bg-card);
+  --toastify-color-dark: var(--color-bg-card);
+  --toastify-color-success: var(--color-success);
+  --toastify-color-error: var(--color-danger);
+  --toastify-color-warning: var(--color-warning);
+  --toastify-color-info: var(--color-accent);
+  --toastify-text-color-light: var(--color-text);
+  --toastify-text-color-dark: var(--color-text);
   --toastify-toast-min-height: 56px;
   --toastify-toast-max-height: 100px;
   --toastify-font-family: inherit;
-  --toastify-z-index: 9999;
 }
 
 .Toastify__toast {
@@ -211,6 +244,8 @@
   min-height: 56px !important;
   padding: 14px 18px !important;
   font-weight: 500;
+  background: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
 }
 
 .Toastify__toast--success {
@@ -235,6 +270,10 @@
 
 .Toastify__close-button {
   @apply text-text-subtle hover:text-text transition-colors;
+}
+
+.Toastify__toast-body {
+  color: var(--color-text) !important;
 }
 
 /* Motion reduced */
