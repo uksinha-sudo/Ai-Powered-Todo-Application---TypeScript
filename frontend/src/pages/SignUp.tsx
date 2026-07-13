@@ -63,13 +63,18 @@ export const SignUp = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${BACKEND_URL_USER}/signup`, { username, email, password });
+      const response = await axios.post(`${BACKEND_URL_USER}/signup`, { username, email, password }, {
+        withCredentials: true,
+        timeout: 30000,
+      });
       toast.success(response.data.message || "Account created successfully!");
       navigate("/signin");
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        console.error('Sign up error:', error.response?.data, error.message);
         toast.error(error.response?.data?.message || "Sign up failed");
       } else {
+        console.error('Sign up error:', error);
         toast.error("An unexpected error occurred");
       }
     } finally {
@@ -81,7 +86,7 @@ export const SignUp = () => {
 
   return (
     <motion.div
-      className="min-h-screen flex items-center justify-center px-4 py-12"
+      className="min-h-screen flex items-center justify-center px-3 sm:px-4 py-8 sm:py-12"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -109,7 +114,7 @@ export const SignUp = () => {
         <GlassCard variant="elevated">
           <GlassCardHeader title="Create Account" subtitle="Start managing your tasks today" />
           <GlassCardContent>
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <GlassInput
                 label="Username"
                 type="text"
@@ -117,9 +122,10 @@ export const SignUp = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 error={errors.username}
-                leftIcon={<User className="h-5 w-5" />}
+                leftIcon={<User className="h-4 w-4 sm:h-5 sm:w-5" />}
                 autoComplete="username"
                 required
+                size="sm"
               />
 
               <GlassInput
@@ -129,9 +135,10 @@ export const SignUp = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 error={errors.email}
-                leftIcon={<Mail className="h-5 w-5" />}
+                leftIcon={<Mail className="h-4 w-4 sm:h-5 sm:w-5" />}
                 autoComplete="email"
                 required
+                size="sm"
               />
 
               <GlassInput
@@ -141,7 +148,7 @@ export const SignUp = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 error={errors.password}
-                leftIcon={<Lock className="h-5 w-5" />}
+                leftIcon={<Lock className="h-4 w-4 sm:h-5 sm:w-5" />}
                 rightIcon={
                   <button
                     type="button"
@@ -149,11 +156,12 @@ export const SignUp = () => {
                     className="text-text-muted hover:text-text transition-colors"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    {showPassword ? <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Eye className="h-4 w-4 sm:h-5 sm:w-5" />}
                   </button>
                 }
                 autoComplete="new-password"
                 required
+                size="sm"
               />
 
               {password && (
@@ -203,7 +211,7 @@ export const SignUp = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 error={errors.confirmPassword}
-                leftIcon={<Lock className="h-5 w-5" />}
+                leftIcon={<Lock className="h-4 w-4 sm:h-5 sm:w-5" />}
                 rightIcon={
                   <button
                     type="button"
@@ -211,20 +219,22 @@ export const SignUp = () => {
                     className="text-text-muted hover:text-text transition-colors"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    {showPassword ? <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Eye className="h-4 w-4 sm:h-5 sm:w-5" />}
                   </button>
                 }
                 autoComplete="new-password"
                 required
+                size="sm"
               />
 
               <GlassButton
                 type="submit"
                 variant="primary"
                 fullWidth
-                size="lg"
+                size="md"
                 loading={isLoading}
-                rightIcon={<ArrowRight className="h-5 w-5" />}
+                rightIcon={<ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />}
+                className="w-full"
               >
                 Create Account
               </GlassButton>

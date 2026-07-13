@@ -139,7 +139,7 @@ export const GlassInput = forwardRef<HTMLInputElement, GlassInputBaseProps>(
 
           {hasRightElement && (
             <motion.div
-              className="absolute right-3 flex items-center text-text-muted pointer-events-none"
+              className="absolute right-3 flex items-center text-text-muted"
               initial={{ opacity: 0, x: 5 }}
               animate={{ opacity: 1, x: 0 }}
             >

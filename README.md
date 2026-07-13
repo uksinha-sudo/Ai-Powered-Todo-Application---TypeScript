@@ -20,3 +20,5 @@ An ai powered Full stack Todo Application;
 -- The site is incomplete but live on https://ai-powered-todo-application-ten.vercel.app/
 
 -- Re-designed frontend with better colors and better Ui
+
+-- fixed responsiveness and password hide and show buttons

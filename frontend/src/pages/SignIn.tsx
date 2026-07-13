@@ -43,14 +43,19 @@ export const SignIn = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${BACKEND_URL_USER}/signin`, { email, password });
+      const response = await axios.post(`${BACKEND_URL_USER}/signin`, { email, password }, {
+        withCredentials: true,
+        timeout: 30000,
+      });
       toast.success(response.data.message || "Welcome back!");
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        console.error('Sign in error:', error.response?.data, error.message);
         toast.error(error.response?.data?.message || "Sign in failed");
       } else {
+        console.error('Sign in error:', error);
         toast.error("An unexpected error occurred");
       }
     } finally {
@@ -60,7 +65,7 @@ export const SignIn = () => {
 
   return (
     <motion.div
-      className="min-h-screen flex items-center justify-center px-4 py-12"
+      className="min-h-screen flex items-center justify-center px-3 sm:px-4 py-8 sm:py-12"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -96,9 +101,10 @@ export const SignIn = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 error={errors.email}
-                leftIcon={<Mail className="h-5 w-5" />}
+                leftIcon={<Mail className="h-4 w-4 sm:h-5 sm:w-5" />}
                 autoComplete="email"
                 required
+                size="sm"
               />
 
               <GlassInput
@@ -108,7 +114,7 @@ export const SignIn = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 error={errors.password}
-                leftIcon={<Lock className="h-5 w-5" />}
+                leftIcon={<Lock className="h-4 w-4 sm:h-5 sm:w-5" />}
                 rightIcon={
                   <button
                     type="button"
@@ -116,11 +122,12 @@ export const SignIn = () => {
                     className="text-text-muted hover:text-text transition-colors"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    {showPassword ? <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Eye className="h-4 w-4 sm:h-5 sm:w-5" />}
                   </button>
                 }
                 autoComplete="current-password"
                 required
+                size="sm"
               />
 
               <div className="flex items-center justify-between">
@@ -137,9 +144,9 @@ export const SignIn = () => {
                 type="submit"
                 variant="primary"
                 fullWidth
-                size="lg"
+                size="md"
                 loading={isLoading}
-                rightIcon={<ArrowRight className="h-5 w-5" />}
+                rightIcon={<ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />}
               >
                 Sign In
               </GlassButton>

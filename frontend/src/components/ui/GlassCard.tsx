@@ -17,10 +17,10 @@ const variantStyles = {
 
 const paddingStyles = {
   none: "",
-  sm: "p-4",
-  md: "p-6",
-  lg: "p-8",
-  xl: "p-10",
+  sm: "p-3 sm:p-4",
+  md: "p-4 sm:p-6",
+  lg: "p-6 sm:p-8",
+  xl: "p-8 sm:p-10",
 };
 
 export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
@@ -56,7 +56,7 @@ export const GlassCardHeader = forwardRef<HTMLDivElement, GlassCardHeaderProps>(
   ({ children, className = "", title, subtitle, action, ...props }, ref) => (
     <motion.div
       ref={ref}
-      className={`flex items-start justify-between mb-6 pb-4 border-b border-border/30 ${className}`}
+      className={`flex items-start justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-border/30 ${className}`}
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -65,7 +65,7 @@ export const GlassCardHeader = forwardRef<HTMLDivElement, GlassCardHeaderProps>(
       <div>
         {title && (
           <motion.h3
-            className="text-xl font-semibold text-text tracking-tight"
+            className="text-lg sm:text-xl font-semibold text-text tracking-tight"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
           >
@@ -74,7 +74,7 @@ export const GlassCardHeader = forwardRef<HTMLDivElement, GlassCardHeaderProps>(
         )}
         {subtitle && (
           <motion.p
-            className="mt-1 text-text-subtle"
+            className="mt-1 text-text-subtle text-sm sm:text-base"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
@@ -130,7 +130,7 @@ export const GlassCardFooter = forwardRef<HTMLDivElement, GlassCardFooterProps>(
   ({ children, className = "", divided = true, ...props }, ref) => (
     <motion.div
       ref={ref}
-      className={`flex items-center justify-end gap-3 mt-6 pt-4 ${divided ? "border-t border-border/30" : ""} ${className}`}
+      className={`flex flex-col sm:flex-row items-start sm:items-center justify-end gap-2 sm:gap-3 mt-4 sm:mt-6 pt-3 sm:pt-4 ${divided ? "border-t border-border/30" : ""} ${className}`}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.2 }}

@@ -9,21 +9,27 @@ const app = express();
 app.use(express.json());
 const allowedOrigins = [
     process.env.FRONTEND_URL,
+    'https://ai-powered-todo-application-ten.vercel.app',
     'http://localhost:5173',
     'http://localhost:3000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:3000',
 ].filter(Boolean);
+console.log('Allowed CORS origins:', allowedOrigins);
 app.use(cors({
     origin: (origin, callback) => {
+        console.log('CORS request from origin:', origin);
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         }
         else {
+            console.log('CORS blocked origin:', origin);
             callback(new Error('Not allowed by CORS'));
         }
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/todo", todoRouter);

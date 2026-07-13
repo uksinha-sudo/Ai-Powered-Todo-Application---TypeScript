@@ -50,23 +50,23 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <motion.div className="flex items-center gap-8">
+          <motion.div className="flex items-center gap-6">
             <Link
               to="/dashboard"
               className="flex items-center gap-2"
               aria-label="AI Todo Home"
             >
               <motion.div
-                className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 border border-accent/20"
+                className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 border border-accent/20 sm:h-10 sm:w-10"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <svg className="h-6 w-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-5 w-5 text-accent sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
               </motion.div>
               <motion.span
-                className="font-bold text-xl text-text hidden sm:block"
+                className="font-bold text-lg text-text hidden sm:block"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
@@ -74,7 +74,7 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
               </motion.span>
             </Link>
 
-            <motion.div className="hidden md:flex md:items-center md:gap-1" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+            <motion.div className="hidden lg:flex lg:items-center lg:gap-1" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
               {navLinks.map((link, index) => {
                 const Icon = link.icon;
                 const isActive = location.pathname === link.path;
@@ -90,7 +90,7 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
                       to={link.path}
                       onClick={closeMobileMenu}
                       className={`
-                        relative flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-200
+                        relative flex items-center gap-2 px-3 py-2 rounded-xl font-medium transition-all duration-200
                         ${isActive
                           ? "text-text bg-bg-elevated border border-border/30"
                           : "text-text-muted hover:text-text hover:bg-bg-elevated"
@@ -98,7 +98,7 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
                       `}
                     >
                       <Icon className="h-4 w-4" aria-hidden="true" />
-                      <span>{link.label}</span>
+                      <span className="hidden sm:inline">{link.label}</span>
                       {isActive && (
                         <motion.span
                           className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-6 bg-accent rounded-full"
@@ -114,43 +114,49 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
             </motion.div>
           </motion.div>
 
-          <motion.div className="flex items-center gap-3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
+          <motion.div className="flex items-center gap-2 sm:gap-3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}>
             <GlassIconButton
               variant="ghost"
-              size="md"
+              size="sm"
               aria-label="Toggle theme"
               className="hidden sm:flex"
             >
-              <Sun className="h-5 w-5 text-accent" />
+              <Sun className="h-4 w-4 text-accent" />
             </GlassIconButton>
 
             {user ? (
-              <motion.div className="flex items-center gap-2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
+              <motion.div className="flex items-center gap-1 sm:gap-2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
                 <Link
                   to="/profile"
                   onClick={closeMobileMenu}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl text-text-muted hover:text-text hover:bg-bg-elevated transition-colors"
+                  className="flex items-center gap-2 px-2 py-1.5 rounded-xl text-text-muted hover:text-text hover:bg-bg-elevated transition-colors"
                 >
-                  <User className="h-5 w-5" aria-hidden="true" />
-                  <span className="hidden sm:block font-medium">{user.name}</span>
+                  <User className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+                  <span className="hidden sm:block font-medium text-sm">{user.name}</span>
                 </Link>
                 <GlassButton
                   variant="ghost"
                   size="sm"
-                  leftIcon={<LogOut className="h-4 w-4" />}
+                  leftIcon={<LogOut className="h-3 w-3 sm:h-4 sm:w-4" />}
                   onClick={onSignOut}
                   className="hidden sm:flex"
                 >
-                  Sign Out
+                  <span className="hidden sm:inline">Sign Out</span>
                 </GlassButton>
               </motion.div>
             ) : (
-              <motion.div className="flex items-center gap-2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
+              <motion.div className="flex items-center gap-1 sm:gap-2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
                 <Link to="/signin" onClick={closeMobileMenu}>
-                  <GlassButton variant="ghost" size="sm">Sign In</GlassButton>
+                  <GlassButton variant="ghost" size="sm" className="hidden sm:flex">Sign In</GlassButton>
+                  <GlassIconButton variant="ghost" size="sm" aria-label="Sign In" className="sm:hidden">
+                    <User className="h-4 w-4" />
+                  </GlassIconButton>
                 </Link>
                 <Link to="/signup" onClick={closeMobileMenu}>
-                  <GlassButton variant="primary" size="sm">Get Started</GlassButton>
+                  <GlassButton variant="primary" size="sm" className="hidden sm:flex">Get Started</GlassButton>
+                  <GlassIconButton variant="primary" size="sm" aria-label="Sign Up" className="sm:hidden">
+                    <User className="h-4 w-4" />
+                  </GlassIconButton>
                 </Link>
               </motion.div>
             )}
@@ -160,7 +166,7 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
               size="md"
               aria-label="Toggle menu"
               onClick={toggleMobileMenu}
-              className="md:hidden"
+              className="lg:hidden"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </GlassIconButton>
@@ -168,11 +174,11 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
         </motion.div>
 
         <motion.div
-          className="md:hidden overflow-hidden transition-all duration-300 ease-in-out"
+          className="lg:hidden overflow-hidden transition-all duration-300 ease-in-out"
           animate={{ height: isMobileMenuOpen ? "auto" : 0, opacity: isMobileMenuOpen ? 1 : 0, paddingBottom: isMobileMenuOpen ? "1rem" : 0 }}
           style={{ overflow: "hidden" }}
         >
-          <div className="flex flex-col gap-2 pt-2 pb-4 border-t border-border/30">
+          <div className="flex flex-col gap-1 pt-2 pb-4 border-t border-border/30">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = location.pathname === link.path;
@@ -195,7 +201,7 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
               );
             })}
 
-            <div className="flex items-center gap-3 px-4 pt-4 border-t border-border/30">
+            <div className="flex flex-col gap-2 px-4 pt-4 border-t border-border/30">
               {user ? (
                 <GlassButton variant="secondary" fullWidth leftIcon={<LogOut className="h-4 w-4" />} onClick={onSignOut}>
                   Sign Out
@@ -203,10 +209,10 @@ export const GlassNavbar = ({ className = "", user, onSignOut }: GlassNavbarProp
               ) : (
                 <div className="flex flex-col gap-2 w-full">
                   <Link to="/signin" onClick={closeMobileMenu}>
-                    <GlassButton variant="ghost" fullWidth>Sign In</GlassButton>
+                    <GlassButton variant="ghost" fullWidth size="md">Sign In</GlassButton>
                   </Link>
                   <Link to="/signup" onClick={closeMobileMenu}>
-                    <GlassButton variant="primary" fullWidth>Get Started</GlassButton>
+                    <GlassButton variant="primary" fullWidth size="md">Get Started</GlassButton>
                   </Link>
                 </div>
               )}
@@ -222,7 +228,7 @@ export const NavbarWrapper = ({ children, user, onSignOut }: GlassNavbarProps) =
   return (
     <NavbarProvider>
       <GlassNavbar user={user} onSignOut={onSignOut} />
-      <div className="pt-16 min-h-screen">{children}</div>
+      <div className="pt-14 sm:pt-16 min-h-screen">{children}</div>
     </NavbarProvider>
   );
 };

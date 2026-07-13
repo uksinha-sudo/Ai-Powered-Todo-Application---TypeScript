@@ -42,9 +42,9 @@ export const TodoForm = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="flex gap-3">
+      <div className="flex gap-2 sm:gap-3">
         <motion.div
-          className="flex-1"
+          className="flex-1 min-w-0"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
         >
@@ -54,9 +54,9 @@ export const TodoForm = ({
             onChange={(e) => setText(e.target.value)}
             placeholder={placeholder}
             disabled={disabled || isSubmitting}
-            leftIcon={<Plus className="h-5 w-5 text-text-muted" />}
+            leftIcon={<Plus className="h-4 w-4 sm:h-5 sm:w-5 text-text-muted" />}
             variant="default"
-            size="md"
+            size="sm"
             fullWidth
           />
         </motion.div>
@@ -69,13 +69,14 @@ export const TodoForm = ({
           <GlassButton
             type="submit"
             variant="primary"
-            size="lg"
-            fullWidth
+            size="md"
+            fullWidth={false}
             loading={isSubmitting || loading}
             disabled={!text.trim() || disabled}
-            className="min-w-[120px]"
+            className="w-full sm:w-auto min-w-[100px] sm:min-w-[120px]"
           >
-            Add Task
+            <Plus className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2" aria-hidden="true" />
+            <span className="hidden sm:inline">Add Task</span>
           </GlassButton>
         </motion.div>
       </div>

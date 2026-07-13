@@ -140,9 +140,9 @@ export const Dashboard = () => {
   const completedCount = tasks.filter((t) => t.completion).length;
   const pendingCount = tasks.filter((t) => !t.completion).length;
 
-  return (
+return (
     <NavbarWrapper user={user} onSignOut={handleSignOut}>
-      <main className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
+      <main className="mx-auto max-w-4xl px-3 sm:px-4 lg:px-6 py-6 sm:py-8">
         <motion.div
           className="space-y-6"
           initial={{ opacity: 0, y: 20 }}
@@ -228,14 +228,14 @@ export const Dashboard = () => {
                 title="Your Tasks"
                 subtitle={tasks.length > 0 ? `${tasks.length} task${tasks.length !== 1 ? "s" : ""}` : "No tasks yet"}
               />
-              <GlassCardContent className="p-6 pt-0">
+              <GlassCardContent className="p-4 sm:p-6 pt-0">
                 <TodoList
                   todos={tasks.map((t) => ({ id: t._id, text: t.task, completed: t.completion }))}
                   onToggle={handleToggle}
                   onDelete={handleDelete}
                   emptyMessage="No tasks yet. Add one above to get started!"
                   emptyAction={
-                    <GlassButton variant="ghost" size="sm" leftIcon={<Plus className="h-4 w-4" />}>
+                    <GlassButton variant="ghost" size="sm" fullWidth className="w-full sm:w-auto min-w-[120px]" leftIcon={<Plus className="h-4 w-4" />}>
                       Add your first task
                     </GlassButton>
                   }
