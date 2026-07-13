@@ -7,7 +7,24 @@ import { todoRouter } from './routes/todoRoute.js';
 dotenv.config();
 const app = express();
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+    process.env.FRONTEND_URL,
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:3000',
+].filter(Boolean);
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+}));
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/todo", todoRouter);
 async function connectToDB() {

@@ -1,22 +1,29 @@
-interface inputProps {
-    type: string;
-    placeholder?: string;
-    reference?: React.RefObject<HTMLInputElement | null>;
-    lable?: string;
-    style?: string;
+import { forwardRef, type InputHTMLAttributes } from "react";
+
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "ref"> {
+  label?: string;
+  error?: string;
 }
 
-const defaultStyles = "border px-2 py-2 outline-none"
- 
-const Input = (props: inputProps) => {
-    return(
-        <div className="flex flex-col gap-2">
-        <p className="text-blue-300 ml-2 mt-2">{props.lable}</p>
-        <input type={props.type} placeholder={props.placeholder} ref={props.reference} className={`${defaultStyles} ${props.style}`}/>
-        </div>
-    )
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, error, type = "text", placeholder, className = "", ...props }, ref) => {
+    return (
+      <div className="flex flex-col gap-2">
+        {label && <p className="text-blue-300 ml-2 mt-2">{label}</p>}
+        <input
+          ref={ref}
+          type={type}
+          placeholder={placeholder}
+          className={`border px-2 py-2 outline-none ${className}`}
+          aria-invalid={error ? "true" : "false"}
+          {...props}
+        />
+        {error && <p className="text-red-400 text-sm ml-2" role="alert">{error}</p>}
+      </div>
+    );
+  }
+);
 
-// work => need to define more variants in the input component, for adding tasks section, the current is only useful for signup and signin page
+Input.displayName = "Input";
 
 export default Input;
