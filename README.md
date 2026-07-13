@@ -17,10 +17,10 @@ An ai powered Full stack Todo Application;
 
 -- Added back and logout buttons in Profile route
 
--- The site is incomplete but live on https://ai-powered-todo-application-ten.vercel.app/
-
 -- Re-designed frontend with better colors and better Ui
 
 -- fixed responsiveness and password hide and show buttons
 
 -- added light mode
+
+-- The site is live on https://ai-powered-todo-application-ten.vercel.app/
