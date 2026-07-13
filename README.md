@@ -22,3 +22,5 @@ An ai powered Full stack Todo Application;
 -- Re-designed frontend with better colors and better Ui
 
 -- fixed responsiveness and password hide and show buttons
+
+-- added light mode
